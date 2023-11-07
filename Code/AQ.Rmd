@@ -1,0 +1,52 @@
+---
+title: "Untitled"
+author: "Yue Zhang"
+date: "2023-10-24"
+output: pdf_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r initial setup, message = FALSE}
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+setwd("E:/MCRP/Fall2023/EFC")
+getwd()
+Bakersville_AQ = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/Bakersville_AQ.csv")
+Brunswick_AQ = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/BrunswickCounty_AQ.csv")
+Hamilton_AQ = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/HamiltonWilliamston_AQ.csv")
+Williamston_AQ = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/HamiltonWilliamston_AQ.csv")
+Warrenton_AQ = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/Warrenton_AQ.csv")
+Bakersville_Dashboard = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/Bakersville-Dashboard.csv")
+Brunswick_Dashboard = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/Brunswick-Dashboard.csv")
+Hamilton_Dashboard = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/Hamilton-Dashboard.csv")
+Williamston_Dashboard = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/Williamston-Dashboard.csv")
+Warrenton_Dashboard = read.csv("E:/MCRP/Fall2023/EFC/Data/Raw/Warrenton-Dashboard.csv")
+```
+
+```{r air quality summary, message = FALSE}
+Bakersville_AQ = Bakersville_AQ %>% mutate(Date.Local = mdy(Date.Local), Month = month(Date.Local)) %>% group_by(Month) %>% summarize(MeanAQI = mean(AQI), MaxAQI = max(AQI), MedianAQI = median(AQI), MeanPM25 = mean(Arithmetic.Mean), MaxPM25 = max(Arithmetic.Mean), MedianPM25 = median(Arithmetic.Mean))
+
+Brunswick_AQ = Brunswick_AQ %>% mutate(Date.Local = mdy(Date.Local), Month = month(Date.Local)) %>% group_by(Month) %>% summarize(MeanAQI = mean(AQI), MaxAQI = max(AQI), MedianAQI = median(AQI), MeanPM25 = mean(Arithmetic.Mean), MaxPM25 = max(Arithmetic.Mean), MedianPM25 = median(Arithmetic.Mean))
+
+Hamilton_AQ = Hamilton_AQ %>% mutate(Date.Local = mdy(Date.Local), Month = month(Date.Local)) %>% group_by(Month) %>% summarize(MeanAQI = mean(AQI), MaxAQI = max(AQI), MedianAQI = median(AQI), MeanPM25 = mean(Arithmetic.Mean), MaxPM25 = max(Arithmetic.Mean), MedianPM25 = median(Arithmetic.Mean))
+
+Warrenton_AQ = Warrenton_AQ %>% mutate(Date.Local = mdy(Date.Local), Month = month(Date.Local)) %>% group_by(Month) %>% summarize(MeanAQI = mean(AQI), MaxAQI = max(AQI), MedianAQI = median(AQI), MeanPM25 = mean(Arithmetic.Mean), MaxPM25 = max(Arithmetic.Mean), MedianPM25 = median(Arithmetic.Mean))
+
+Williamston_AQ = Williamston_AQ %>% mutate(Date.Local = mdy(Date.Local), Month = month(Date.Local)) %>% group_by(Month) %>% summarize(MeanAQI = mean(AQI), MaxAQI = max(AQI), MedianAQI = median(AQI), MeanPM25 = mean(Arithmetic.Mean), MaxPM25 = max(Arithmetic.Mean), MedianPM25 = median(Arithmetic.Mean))
+
+write.csv(Bakersville_AQ, "E:/MCRP/Fall2023/EFC/Data/Processed/Bakersville_AQ_monthly")
+write.csv(Brunswick_AQ, "E:/MCRP/Fall2023/EFC/Data/Processed/Brunswick_AQ_monthly")
+write.csv(Hamilton_AQ, "E:/MCRP/Fall2023/EFC/Data/Processed/Hamilton_AQ_monthly")
+write.csv(Williamston_AQ, "E:/MCRP/Fall2023/EFC/Data/Processed/Williamston_AQ_monthly")
+write.csv(Warrenton_AQ, "E:/MCRP/Fall2023/EFC/Data/Processed/Warrenton_AQ_monthly")
+
+
+```
+
+
